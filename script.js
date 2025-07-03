@@ -1,4 +1,15 @@
-/* 오늘의 운세 section 추가 */
+/* 다크모드 */
+const profilePhoto = document.querySelector(".profile-photo");
+
+profilePhoto.addEventListener("click", () => {
+  //   if (document.body.className == "dark-mode") {
+  //     document.body.className = "";
+  //   } else {
+  //     document.body.className = "dark-mode";
+  //   }
+  document.body.classList.toggle("dark-mode");
+});
+
 fetch(
   "https://m.search.naver.com/p/csearch/content/apirender.nhn?where=nexearch&pkid=387&u2=20050105&q=생년월일+운세&u1=f&u3=solar&u4=12&_=1719518803829"
 )
@@ -28,20 +39,18 @@ fetch(
 
     const contactSection = document.querySelector(".contact");
     contactSection.after(fortuneSection); // contact의 뒤에 fortune 추가
-
-    // section 초기화 및 이벤트 리스너 추가
     initializeSections();
   });
 
 function initializeSections() {
+  /* 함수화 */
   const sections = document.querySelectorAll(".right_container section");
   let currentIndex = 0;
 
-  sections.forEach((section, i) => {
-    section.style.display = i === 0 ? "flex" : "none";
+  sections.forEach((section, index) => {
+    section.style.display = index === 0 ? "flex" : "none";
   });
 
-  // 다음 section으로 이동
   const showAfterSection = () => {
     sections.forEach((section) => {
       section.style.display = "none";
@@ -53,7 +62,6 @@ function initializeSections() {
     }
     sections[currentIndex].style.display = "flex"; // 다음 section 보여주기
   };
-  // 이전 section으로 이동
   const showBeforeSection = () => {
     sections.forEach((section) => {
       section.style.display = "none";
